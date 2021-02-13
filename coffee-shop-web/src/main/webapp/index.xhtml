@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+    <h:outputStylesheet library="css" name="table-style.css"/>
+</h:head>
+<h:body>
+
+    <h1>Coffee shop</h1>
+    <h:form id="mainform">
+        <h:dataTable id="orderTable" value="#{ordersBean.getOrders()}" var="o"
+                     styleClass="order-table"
+                     headerClass="order-table-header"
+                     rowClasses="order-table-odd-row,order-table-even-row">
+
+            <h:column>
+                <f:facet name="header">Order type</f:facet>
+                #{o.getString("type")}
+            </h:column>
+            <h:column>
+                <f:facet name="header">Order status</f:facet>
+                #{o.getString("status")}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Action</f:facet>
+                <h:commandLink value="Delete"
+                               action="#{ordersBean.deleteOrder( o.getJsonNumber('id').longValue() ) }">
+                </h:commandLink>
+            </h:column>
+
+        </h:dataTable>
+
+        <h3>Enter Order</h3>
+        <table>
+            <tr>
+                <td>Order type :</td>
+                <td>
+                    <h:selectOneMenu value="#{ordersBean.type}">
+                        <f:selectItem itemValue="Espresso" itemLabel="ESPRESSO"/>
+                        <f:selectItem itemValue="Latte" itemLabel="LATTE"/>
+                        <f:selectItem itemValue="Pour over" itemLabel="POUR_OVER"/>
+                    </h:selectOneMenu>
+                </td>
+            </tr>
+        </table>
+
+        <h:commandButton value="Order coffee" action="#{ordersBean.orderCoffee()}"/>
+
+    </h:form>
+</h:body>
+</html>

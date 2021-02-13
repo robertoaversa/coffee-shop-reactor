@@ -1,0 +1,4 @@
+curl localhost:9080/coffee-shop/resources/orders
+curl localhost:9080/coffee-shop/resources/orders -i -XPOST \
+  -H 'Content-Type: application/json' \
+  -d '{"type":"ESPRESSO"}'

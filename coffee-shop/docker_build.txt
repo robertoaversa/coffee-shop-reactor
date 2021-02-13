@@ -1,0 +1,3 @@
+docker network create --subnet=192.168.42.0/24 dkrnet
+docker build -t coffee-shop:jpa .
+docker run --rm -d  --name coffee-shop --network dkrnet -p 9080:9080 -p 9443:9443 coffee-shop:jpa
