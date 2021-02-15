@@ -1,3 +1,5 @@
 build:
   docker:
     web: coffee-shop/Dockerfile
+run:
+  web: sh coffee-shop/build.sh
