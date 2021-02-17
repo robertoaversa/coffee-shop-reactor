@@ -18,17 +18,6 @@
 
     <webApplication id="coffee-shop" location="coffee-shop.war" contextRoot="${app.context.root}"/>
 
-    <keyStore id="defaultKeyStore" password="Liberty"/>
-
-    <basicRegistry id="basic" realm="MicroProfileMetrics">
-        <user name="admin" password="adminadmin"/>
-        <user name="nonadmin" password="guest"/>
-    </basicRegistry>
-
-    <administrator-role>
-        <user>admin</user>
-    </administrator-role>
-
     <!-- Derby Library Configuration -->
     <library id="derbyJDBCLib">
         <file name="${shared.resource.dir}/derby-10.14.2.0.jar"/>
