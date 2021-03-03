@@ -5,8 +5,6 @@ import it.raversa.be.CoffeeShop;
 import it.raversa.model.CoffeeOrder;
 
 import javax.inject.Inject;
-import javax.json.Json;
-import javax.json.JsonObject;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
@@ -16,9 +14,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.UriBuilder;
+import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 import java.util.List;
 
@@ -29,6 +28,9 @@ public class OrdersResource {
 
     @Inject
     CoffeeShop coffeeShop;
+
+    @Context
+    UriInfo uriInfo;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -62,15 +64,10 @@ public class OrdersResource {
     }
 
     private URI buildUri(CoffeeOrder order) {
-        return UriBuilder.fromUri("http://localhost:9080/coffee-shop/resources/orders/{id}")
+        return uriInfo.getBaseUriBuilder()
+                .path(OrdersResource.class)
+                .path(OrdersResource.class, "getOrder")
                 .build(order.getId());
     }
 
-    private JsonObject buildOrder(CoffeeOrder order) {
-        return Json.createObjectBuilder()
-                .add("type", order.getType().name())
-                .add("status", order.getStatus().name())
-                .add("_self", buildUri(order).toString())
-                .build();
-    }
 }
