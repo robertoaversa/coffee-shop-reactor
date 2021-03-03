@@ -12,13 +12,11 @@
         <feature>mpRestClient-1.4</feature>
     </featureManager>
 
-    <variable name="default.http.port" defaultValue="9080"/>
-    <variable name="default.https.port" defaultValue="9443"/>
     <variable name="app.context.root" defaultValue="coffee-shop-web"/>
 
     <!-- tag::httpEndpoint[] -->
-    <httpEndpoint httpPort="${default.http.port}"
-                  httpsPort="${default.https.port}" id="defaultHttpEndpoint" host="*"/>
+    <httpEndpoint httpPort="9081"
+                  httpsPort="9443" id="defaultHttpEndpoint" host="*"/>
     <!-- end::httpEndpoint[] -->
     <webApplication id="coffee-shop-web" location="coffee-shop-web.war" contextRoot="${app.context.root}"/>
 </server>
